@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CallSms</string>
+    <string name="call">Позвонить</string>
+    <string name="send">Отправить</string>
+    <string name="ph">Телефон</string>
+    <string name="textsms">Текст сообщения</string>
+
+</resources>
