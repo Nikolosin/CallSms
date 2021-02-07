@@ -18,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 11;
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 10;
-    Button call;
-    Button send;
-    EditText phone;
-    EditText text;
+    Button callBtn;
+    Button sendBtn;
+    EditText phoneEditTxt;
+    EditText textEditTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
 
-        call.setOnClickListener(new View.OnClickListener() {
+        callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callByNumber();
             }
         });
         
-        send.setOnClickListener(new View.OnClickListener() {
+        sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendSms();
@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, MY_PERMISSIONS_REQUEST_CALL_PHONE);
         } else {
-            String ph = "tel:" + phone.getText().toString();
-            Intent dialIntent = new Intent(Intent.ACTION_CALL, Uri.parse(ph));
+            String phone = "tel:" + phoneEditTxt.getText().toString();
+            Intent dialIntent = new Intent(Intent.ACTION_CALL, Uri.parse(phone));
             startActivity(dialIntent);
         }
     }
@@ -59,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, MY_PERMISSIONS_REQUEST_SEND_SMS);
         } else {
-            String ph = phone.getText().toString();
-            String textSms = text.getText().toString();
+            String phone = phoneEditTxt.getText().toString();
+            String textSms = textEditTxt.getText().toString();
             SmsManager sms = SmsManager.getDefault();
-            sms.sendTextMessage(ph, null, textSms, null, null);
+            sms.sendTextMessage(phone, null, textSms, null, null);
         }
     }
 
@@ -87,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        call = findViewById(R.id.btnCall);
-        send = findViewById(R.id.btnSend);
-        phone = findViewById(R.id.eTPhone);
-        text = findViewById(R.id.eTText);
+        callBtn = findViewById(R.id.btnCall);
+        sendBtn = findViewById(R.id.btnSend);
+        phoneEditTxt = findViewById(R.id.eTPhone);
+        textEditTxt = findViewById(R.id.eTText);
     }
 }
